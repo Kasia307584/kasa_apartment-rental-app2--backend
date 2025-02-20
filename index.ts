@@ -24,6 +24,9 @@ const typeDefs = gql`
     apartments: [Apartment!]!
     apartment(id: ID!): Apartment
   }
+  type Mutation {
+    addApartment(title: String!, cover: String!): Apartment
+  }
 `;
 
 const resolvers = {
@@ -32,6 +35,15 @@ const resolvers = {
     apartment: (_: any, { id }: { id: string }) =>
       apartments.find((apt) => apt.id === id),
   },
+  // Mutation: {
+  //   addApartment: (
+  //     _: any,
+  //     { title, cover }: { title: string; cover: string }
+  //   ) => {
+  //     const newApartment = { id: "jk22", title, cover };
+  //     apartments.push(newApartment);
+  //   },
+  // },
 };
 
 const server = new ApolloServer({ typeDefs, resolvers });
